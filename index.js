@@ -6,11 +6,16 @@ const client = new Discord.Client();
 
 client.on('ready', () => {
     console.log('ShadowBot online!');
+
+    const channel = member.guild.channels.cache.find(ch => ch.name === 'the-logs');
+    if (!channel) return;
+
+    channel.send(`The ShadowBot has Awakened`);
 });
 
 //welcome message
 client.on('guildMemberAdd', member => {
-    const channel = member.guild.channels.cache.find(ch => ch.name === 'logs');
+    const channel = member.guild.channels.cache.find(ch => ch.name === 'the-logs');
     if (!channel) return;
 
     channel.send(`Welcome to the server, ${member}`);
@@ -21,7 +26,7 @@ client.on('message', message => {
     if (!message.guild) return;
 
     if (message.content === '-ping') {
-        message.channel.send('stop it!');
+        message.channel.send('stop it! or I will pong you.');
 
         // If the message content starts with "-kick"
     } else if (message.content.startsWith('-kick')) {
